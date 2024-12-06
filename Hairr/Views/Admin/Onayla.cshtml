@@ -1,0 +1,31 @@
+﻿@model Appointment
+
+@{
+    ViewData["Title"] = "Onayla";
+    Layout = "~/Views/Shared/Test.cshtml";
+}
+
+
+<h2>Randevu Detay ve Onaylama</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Müşteri Adı: @Model.CustomerName</h5>
+        <p class="card-text">Tarih: @Model.AppointmentDate.ToString("dd.MM.yyyy HH:mm")</p>
+        <p class="card-text">Personel: @Model.PersonelId</p>
+        <p class="card-text">Durum: @Model.Status</p>
+    </div>
+</div>
+
+<form asp-action="Onayla" method="post" class="mt-3">
+    <input type="hidden" name="id" value="@Model.ID" />
+    <div class="form-group">
+        <label>Onay Durumu</label><br />
+        <input type="radio" id="onay" name="onayDurumu" value="true" checked />
+        <label for="onay">Onayla</label><br />
+        <input type="radio" id="red" name="onayDurumu" value="false" />
+        <label for="red">Reddet</label>
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+</form>

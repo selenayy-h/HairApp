@@ -31,6 +31,13 @@
     </div>
 
     <button type="submit" class="btn btn-success">Randevu Kaydet</button>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
 </form>
 
 @* denemecik*@
