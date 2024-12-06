@@ -1,0 +1,34 @@
+﻿@using Hairr.Models
+@model Appointment
+
+
+@{
+    ViewData["Title"] = "RandevuOlustur";
+    Layout = "~/Views/Shared/Test.cshtml";
+}
+
+<form asp-action="RandevuOlustur" method="post">
+    <div class="form-group">
+        <label for="CustomerName">Müşteri Adı</label>
+        <input type="text" asp-for="CustomerName" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="AppointmentDate">Randevu Tarihi</label>
+        <!-- Zaman seçimi için input -->
+        <input type="datetime-local" asp-for="AppointmentDate" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+    </div>
+
+    <div class="form-group">
+        <label for="PersonelId">Personel Seçin</label>
+        <!-- Personel seçimi için dropdown -->
+        <select asp-for="PersonelId" class="form-control">
+            @foreach (var personel in ViewBag.Personellers as List<Personel> ?? new List<Personel>())
+            {
+                <option value="@personel.PersonelId">@personel.Ad</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Randevu Kaydet</button>
+</form>
