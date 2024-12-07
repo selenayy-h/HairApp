@@ -1,11 +1,14 @@
 ﻿using Hairr.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hairr.Controllers
 {
     public class ManController : Controller
     {
+
         Context c = new Context();
+        [Authorize(Roles = "K")] // Yalnızca adminler erişebilir
         public IActionResult Index()
         {
             var degerler = c.Islems.ToList();

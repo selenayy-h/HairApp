@@ -17,8 +17,8 @@ namespace Hairr.Models
 
         public DbSet<Appointment> Appointments { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<Admin> Admins { get; set; }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Appointment -> Personel ilişkisinde Cascade yerine Restrict kullan
             modelBuilder.Entity<Appointment>()
