@@ -8,7 +8,7 @@ namespace Hairr.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=LAPTOP-ACDH94DG\\SQLEXPRESS01;database=HairDresser;integrated security=true;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("server=LAPTOP-ACDH94DG\\SQLEXPRESS01;database=HairDresser;integrated security=true;TrustServerCertificate=True;Connection Timeout=30;");
         }
 
         public DbSet<Personel> Personels { get; set; }
@@ -18,7 +18,9 @@ namespace Hairr.Models
         public DbSet<Appointment> Appointments { get; set; }
 
 		public DbSet<Admin> Admins { get; set; }
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Appointment -> Personel ilişkisinde Cascade yerine Restrict kullan
             modelBuilder.Entity<Appointment>()

@@ -8,7 +8,7 @@ namespace Hairr.Controllers
     {
 
         Context c = new Context();
-        [Authorize(Roles = "K")] // Yalnızca adminler erişebilir
+     // Yalnızca adminler erişebilir
         public IActionResult Index()
         {
             var degerler = c.Islems.ToList();
@@ -50,33 +50,33 @@ namespace Hairr.Controllers
 
 
 
-        [HttpPost]
-        public IActionResult RandevuOlustur(Appointment appointment)
-        {
-            if (ModelState.IsValid)
-            {
-                // Randevunun varsayılan durumu "Beklemede" olacak
-                appointment.Status = "Beklemede";
+        //[HttpPost]
+        //public IActionResult RandevuOlustur(Appointment appointment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Randevunun varsayılan durumu "Beklemede" olacak
+        //        appointment.Status = "Beklemede";
 
-                // Randevuyu veritabanına ekle
-                c.Appointments.Add(appointment);
-                c.SaveChanges();
+        //        // Randevuyu veritabanına ekle
+        //        c.Appointments.Add(appointment);
+        //        c.SaveChanges();
 
-                // Kullanıcıya bilgi mesajı göstermek için TempData kullanıyoruz
-                TempData["SuccessMessage"] = "Randevu talebiniz alınmıştır. Onay bekleniyor.";
+        //        // Kullanıcıya bilgi mesajı göstermek için TempData kullanıyoruz
+        //        TempData["SuccessMessage"] = "Randevu talebiniz alınmıştır. Onay bekleniyor.";
 
-                // Başarıyla tamamlandıktan sonra Index sayfasına yönlendirelim
-                return RedirectToAction("Index");
-            }
+        //        // Başarıyla tamamlandıktan sonra Index sayfasına yönlendirelim
+        //        return RedirectToAction("Index");
+        //    }
 
-            // Hata durumunda formu yeniden göster
-            var islem = c.Islems.FirstOrDefault(x => x.ID == appointment.IslemId);
-            var personeller = c.Personels.Where(x => x.IslemId == appointment.IslemId).ToList();
-            ViewBag.Islem = islem;
-            ViewBag.Personeller = personeller;
+        //    // Hata durumunda formu yeniden göster
+        //    var islem = c.Islems.FirstOrDefault(x => x.ID == appointment.IslemId);
+        //    var personeller = c.Personels.Where(x => x.IslemId == appointment.IslemId).ToList();
+        //    ViewBag.Islem = islem;
+        //    ViewBag.Personeller = personeller;
 
-            return View(appointment);
-        }
+        //    return View(appointment);
+        //}
 
 
     }
